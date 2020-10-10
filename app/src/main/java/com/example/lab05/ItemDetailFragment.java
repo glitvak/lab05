@@ -1,18 +1,23 @@
 package com.example.lab05;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lab05.dummy.DummyContent;
+
+import java.util.Objects;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -48,7 +53,7 @@ public class ItemDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
+            //Log.e("item", mItem.img);
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
@@ -62,9 +67,14 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.item_detail, container, false);
 
+
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
+
+            Resources resources = getResources();
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.details);
+            ((ImageView) rootView.findViewById(R.id.imageView)).setImageResource(resources.getIdentifier(mItem.img,
+                    "drawable", Objects.requireNonNull(getActivity()).getPackageName()));
         }
 
         return rootView;
