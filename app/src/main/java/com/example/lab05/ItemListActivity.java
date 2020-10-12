@@ -1,5 +1,6 @@
 package com.example.lab05;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -116,11 +117,12 @@ public class ItemListActivity extends AppCompatActivity {
             return new ViewHolder(view);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             int item_id = Integer.parseInt(mValues.get(position).id) + 1;
             holder.mIdView.setText(String.valueOf(item_id));
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mContentView.setText(mValues.get(position).content + " " + mValues.get(position).price);
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
